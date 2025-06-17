@@ -9,6 +9,8 @@ import AndroidDevelopment from './pages/AndroidDevelopment';
 import AIAutomation from './pages/AIAutomation';
 import Contact from './pages/Contact';
 import Career from './pages/Career';
+import FloatingWAButtons from './components/FloatingWAButtons';
+import FloatingCallButtons from './components/FloatingCallButtons';
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/career" element={<Career />} />
         </Routes>
       </main>
+      <FloatingWAButtons />
+      <FloatingCallButtons />
       <Footer />
     </Router>
   );
