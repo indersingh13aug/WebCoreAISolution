@@ -7,7 +7,7 @@ import {
   Moon,
   Sun,
 } from 'lucide-react';
-import logo from '../assets/2-removebg-preview.png';
+import logo from '../assets/download.png';
 
 const Navbar = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);

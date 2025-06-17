@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import logo from '../assets/log2.png'; // Make sure logo is in src/assets
+import logo from '../assets/logo33.jpg'; // Make sure logo is in src/assets
 
 const Header = () => {
   const [openServices, setOpenServices] = useState(false);
@@ -8,16 +8,15 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="flex items-center justify-between p-4 max-w-7xl mx-auto h-16">
-        <Link to="/" className="items-left">
-          <img
-            src={logo}
-            alt="WebCore AI Solutions Logo"
-              className="h-full w-auto object-contain bg-transparent"
-          />
-        </Link>
-        <Link to="/" className="text-2xl font-bold text-blue-700">
-          WebCore AI Solutions
-        </Link>
+        <Link to="/" className="flex items-center h-16">
+  <img
+    src={logo}
+    alt="WebCore AI Solutions Logo"
+    className="h-full w-auto object-contain"
+  />
+</Link>
+
+
         <ul className="flex space-x-6 font-medium text-gray-700 relative">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
