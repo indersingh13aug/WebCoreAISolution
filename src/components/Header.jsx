@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'; // icon library
 import logo from '../assets/logo33.jpg';
 
 const Header = () => {
-  const [openServices, setOpenServices] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
@@ -24,19 +24,15 @@ const Header = () => {
         <ul className="hidden md:flex space-x-6 font-medium text-gray-700 relative">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li
-            onMouseEnter={() => setOpenServices(true)}
-            onMouseLeave={() => setOpenServices(false)}
-            className="relative cursor-pointer"
-          >
-            <span>Services ▾</span>
-            {openServices && (
-              <ul className="absolute top-full left-0 bg-white border mt-2 shadow-md space-y-2 px-4 py-2 w-52 z-50">
-                <li><Link to="/services/web-development">Web Development</Link></li>
-                <li><Link to="/services/android-development">Android Development</Link></li>
-                <li><Link to="/services/ai-automation">AI Automation</Link></li>
-              </ul>
-            )}
+          <li className="relative group" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)} >
+            <span className="hover:text-blue-500 cursor-pointer">Services</span>
+              {isServicesOpen && (
+                <ul className="absolute left-0 mt-0 w-64 bg-gray-700 shadow z-50">
+                  <li><Link to="/services/web-development" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">Web Development</Link></li>
+                  <li><Link to="/services/android-development" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">Android Development</Link></li>
+                  <li><Link to="/services/ai-automation" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">AI Automation</Link></li>
+                </ul>
+              )}
           </li>
           <li><Link to="/contact">Contact Us</Link></li>
           <li><Link to="/career">Career</Link></li>

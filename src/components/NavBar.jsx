@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   X,
@@ -16,7 +16,9 @@ const Navbar = () => {
     localStorage.getItem('theme') === 'dark'
   );
   const location = useLocation();
+  const servicesRef = useRef();
 
+  // Toggle dark mode
   useEffect(() => {
     const root = window.document.documentElement;
     if (darkMode) {
@@ -27,6 +29,17 @@ const Navbar = () => {
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
+
+  // Close submenu on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target)) {
+        setIsServicesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const isActive = (path) => location.pathname === path;
 
@@ -55,36 +68,19 @@ const Navbar = () => {
               About
             </Link>
           </li>
-          <li
-            className="relative"
-            onMouseEnter={() => setIsServicesOpen(true)}
-            onMouseLeave={() => setIsServicesOpen(false)}
-          >
-            <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-              Services <ChevronDown size={16} />
-            </span>
-            <ul
-              className={`absolute left-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 border shadow-md rounded-lg py-2 z-10 transition-all duration-200 ease-in-out transform ${
-                isServicesOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-              }`}
-            >
-              <li>
-                <Link to="/services/web-development" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                  Web Development
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/android-development" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                  Android Development
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/ai-automation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                  AI Automation
-                </Link>
-              </li>
-            </ul>
+         
+          <li className="relative group" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)} >
+            <span className="hover:text-blue-500 cursor-pointer">Services</span>
+              {isServicesOpen && (
+                <ul className="absolute left-0 mt-0 w-64 bg-blue-700 shadow z-50">
+                  <li><Link to="/services/web-development" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">Web Development</Link></li>
+                  <li><Link to="/services/android-development" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">Android Development</Link></li>
+                  <li><Link to="/services/ai-automation" className="block px-4 py-2 text-white font-semibold hover:bg-gray-600">AI Automation</Link></li>
+                </ul>
+              )}
           </li>
+
+          
           <li>
             <Link
               to="/contact"
